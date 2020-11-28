@@ -9,12 +9,14 @@ import javax.swing.JOptionPane;
  *
  * @author Rodrigo
  */
+
 public class Leer_Email extends Conexion{
     
     // Comprueba si existe un correo en la base de datos.
-       public int ComprobarCorreo(String correo) throws SQLException {
+    public int ComprobarCorreo(String correo) throws SQLException {
         String verificaConsulta = null;
-        super.query = "SELECT email FROM usuario WHERE email = '" + correo + "'";
+        
+        super.query = "SELECT email FROM usuario WHERE email = '"+correo+"'";
         try {
             super.st = (Statement) conectar().createStatement();
             super.rs = st.executeQuery(query);
@@ -24,12 +26,24 @@ public class Leer_Email extends Conexion{
 
             }
 
-        } catch (SQLException ex) {
-            return 0;
+        } catch (SQLException ex) {    
+           return 0; 
         }
         st.close();
-        return 1;
-
+        if(verificaConsulta != null){
+        
+        if (verificaConsulta.equalsIgnoreCase(correo)) {
+            return 1;
+        }
+            return 0;
+        }
+            return 0;
+            
+        
+        
+        
+        
+       
     }
        
        // SI EL CORREO COINCIDE SE MODIFICARA EL PASSWROD

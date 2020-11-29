@@ -1,7 +1,7 @@
 
 package controlador;
 
-import Entidad.RegistroUsuario;
+import Entidad.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Servlet_InicioSesion extends HttpServlet {
         
         int advertencia = 0;
         ArrayList listaErrores = new ArrayList();
-        RegistroUsuario usuario1 = new RegistroUsuario();
+        Usuario usuario1 = new Usuario();
         Crear_Usuario valida = new Crear_Usuario();
         Leer_Usuario validaRoles = new Leer_Usuario();
         // SESION

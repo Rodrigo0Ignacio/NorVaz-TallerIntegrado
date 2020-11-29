@@ -1,14 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
+
+import Entidad.Usuario;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Rodrigo
  */
-public class Actualizar_Usuario {
+public class Actualizar_Usuario extends Conexion {
+
+    public int actualizarPassword(Usuario usuario) {
+        super.query = "update usuario set contrasena = '" + usuario.getContrasena()
+                + "' where email ='" + usuario.getEmail() + "'";
+
+        try {
+            super.st = (Statement) conectar().createStatement();
+            st.executeUpdate(query);
+            
+            st.close();
+
+        } catch (SQLException ex) {
+            return 0;
+        }
+        return 1;
+    }
+
+    public int ActualizarDatos(Usuario usuario) {
+        
+
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 }

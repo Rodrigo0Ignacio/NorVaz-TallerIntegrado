@@ -1,5 +1,6 @@
-
-<%@page import="Entidad.RegistroUsuario"%>
+<%@page import="modelo.Leer_Usuario"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidad.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
 <%
@@ -16,6 +17,21 @@ if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null 
     rol = sesion.getAttribute("rol").toString();
     usuario = sesion.getAttribute("usuario").toString();
 }
+
+// VISTA DE DATOS DE USUARIO
+Leer_Usuario atributos = new Leer_Usuario();
+
+Usuario user = new Usuario();
+user.setEmail(usuario);
+atributos.listarDatosUsuario(user);
+
+// NO SE PUEDE ACCEDER A ESTA PAGINA SIN HAVER INICIADO SESION
+if(usuario == null){
+    response.sendRedirect("index.jsp");
+}
+// lista errores
+ArrayList lista = (ArrayList) request.getAttribute("listaErrores");
+String confirmaCamvio = (String) request.getAttribute("mensaje");
 
 switch (rol){
     case "1":
@@ -39,7 +55,7 @@ switch (rol){
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/InicioSesion-estilos.css" rel="stylesheet" type="text/css"/>
-        <title>NorVaz - Sesion</title>
+        <title>NorVaz - Editar Perfil</title>
     </head>
     <body>
         <!--VENTANA FLOTANTE-->
@@ -107,8 +123,7 @@ switch (rol){
                 <nav class="navegacionUser">
                     <ul class="menu2">
 
-                        <li><a href=" "> Editar Perfil </a></li>
-                        <li><a href=" "> Cambiar contraseña </a></li>
+                        <li><a href="usuario-Editar.jsp"> Editar Perfil </a></li>
                         <li><a href=" "> Sigue tu despacho </a></li>
                         <li><a href=" "> Sigue tu despacho </a></li>
                         <li><a href=" "> Sigue tu despacho </a></li>
@@ -137,44 +152,57 @@ switch (rol){
         </div>
         <div id="contenido">
             <div class="InisiarSesion">
-                <h2>Iniciar Sesion</h2>
-                <form action="Servlet_InicioSesion" method="post">
+                <h2>Cambiar Contraseña</h2>
+                <form action="servlet_usuario_Editar" method="post"> 
+                    
                 <table>
                        <tr><br><td><br></td><td></td></tr>
                        <tr><td><br></td><td></td></tr>
-                       <tr><td>Usuario* </td><td><input type="text" value="" name="txt_verificarUsuario" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
+                       <tr><td>Nueva contraseña* </td><td><input type="password" value="" name="txt_password1"></td></tr>
                        <tr><td><br></td><td></td></tr>
-                       <tr><td>Contraseña* </td><td><input type="password" value="" name="txt_verificarPassword"></td></tr>
+                       <tr><td>Repita contraseña* </td><td><input type="password" value="" name="txt_password2"></td></tr>
                        <tr><td><br></td><td></td></tr>
-                       
-                       <tr><td></td><td> <input type="submit" name="btn_Validar" value="Inciar Sesion"></td></tr>
+                       <tr><td></td><td> <input type="submit" name="btn_restablecer" value="Cambiar"></td></tr>
+                       <tr><td><br></td><td></td></tr>
+                       <p> Al modificar la contraseña tendra que volver a 
+                               iniciar sesion.</p>
+                       <input type="hidden" name="txt_correo" value="<%=usuario%>" placeholder="<%=usuario%>">    
+
+                       <!--MUESTRA LOS MENSAJES DE ERROR -->
+                       <%if (lista != null) { %>
+                       <%for (int i = 0; i < lista.size(); i++) {%>
+                       <ul>
+                           <tr><td><br></td><td><%=lista.get(i)%></td></tr>
+                       </ul>
+
+                       <% }
+                    }%>
+                       <%if (confirmaCamvio != null) {%>
+                       <tr><td><br></td><td><%=confirmaCamvio%></td></tr>
+                               <%}%>
                 </table>
                 </form>
 
 
             </div>
                 <div class="Registrarse">
-                    <h2> Registrarse </h2>
-                    <form method="post" action="Servlet_InicioSesion" >
+                    <h2> Modificar Datos </h2>
+                    <form method="post" action="servlet_usuario_Editar" >
                     <table>
-                        <tr><br> <h3> <td><br></td><td></td></tr>
+
+                        <tr><br><td><br></td><td></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Nombre* </td><td><input type="text" value="" name="txt_regisNombre"></td></tr>
+                           <tr><td>Nombre* </td><td><input type="text" value="<%=user.getNombre()%>" name="txt_regisNombre"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Apellidos* </td><td><input type="text" value="" name="txt_regisApellido"></td></tr>
+                           <tr><td>Apellidos* </td><td><input type="text" value="<%=user.getApellidos()%>" name="txt_regisApellido"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Email* </td><td><input type="email" value="" name="txt_regisEmail" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
+                           <tr><td>Email* </td><td><input type="email" value="<%=user.getEmail()%>" name="txt_regisEmail1" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Rut* </td><td><input type="text" value="" name="txt_regisRut" placeholder="ejemplo: 12.111.222-4"></td></tr>
+                           <tr><td>confirmar Email* </td><td><input type="email" value="<%=user.getEmail()%>" name="txt_regisEmail2" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Telefono* </td><td><input type="tel" value="" name="txt_regisTelefono" placeholder="ejemplo: 98745632"></td></tr>
+                           <tr><td>Telefono* </td><td><input type="tel" value="<%=user.getTelefono()%>" name="txt_regisTelefono" placeholder="ejemplo: 98745632"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Contraseña* </td><td><input type="password" value="" name="txt_regisContrasena"></td></tr>
-                           <tr><td><br></td><td></td></tr>
-                           <tr><td>Confirma contraseña* </td><td><input type="password" value="" name="txt_regisConfirmaContrasena"></td></tr>
-                           <tr><td><br></td><td></td></tr>
-                           
-                           <tr><td></td><td> <input type="submit" name="btn_Registrar" value="Registrarse"></td></tr>
+                           <tr><td></td><td> <input type="submit" name="btn_Registrar" value="Modificar"></td></tr>
         
                     </table>
                     </form>

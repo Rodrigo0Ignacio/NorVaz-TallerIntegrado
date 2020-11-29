@@ -1,7 +1,7 @@
 
 package modelo;
 
-import Entidad.RegistroUsuario;
+import Entidad.Usuario;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ public class Crear_Usuario extends Conexion{
     
 
 // Registro solo para usuarios
-    public int RegistrarUsuario(RegistroUsuario usuario) throws SQLException{
+    public int RegistrarUsuario(Usuario usuario) throws SQLException{
         super.query = "INSERT INTO usuario VALUES(1,'"+usuario.getRut()+"','"+usuario.getNombre()+"','"
                 +usuario.getApellidos()+"','"+usuario.getEmail()+"','"+usuario.getTelefono()+"','"+
                 usuario.getContrasena()+"')";
@@ -38,7 +38,7 @@ public class Crear_Usuario extends Conexion{
     }
     
     // Registro solo para Administradores
-    public int RegistrarAdministrador(RegistroUsuario usuario) throws SQLException{
+    public int RegistrarAdministrador(Usuario usuario) throws SQLException{
         super.query = "INSERT INTO usuario VALUES(2,'"+usuario.getRut()+"','"+usuario.getNombre()+"','"
                 +usuario.getApellidos()+"','"+usuario.getEmail()+"','"+usuario.getTelefono()+"','"+
                 usuario.getContrasena()+"')";

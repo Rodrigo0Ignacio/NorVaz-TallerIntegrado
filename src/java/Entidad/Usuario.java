@@ -5,7 +5,7 @@ package Entidad;
  *
  * @author Rodrigo
  */
-public class RegistroUsuario {
+public class Usuario {
     public String rut;
     public String nombre;
     public String apellidos;
@@ -13,10 +13,10 @@ public class RegistroUsuario {
     public String telefono;
     public String contrasena;
 
-    public RegistroUsuario() {
+    public Usuario() {
     }
     
-    public RegistroUsuario(String rut, String nombre, String apellidos, String email, String telefono, String contrasena) {
+    public Usuario(String rut, String nombre, String apellidos, String email, String telefono, String contrasena) {
         this.rut = rut;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -24,6 +24,15 @@ public class RegistroUsuario {
         this.telefono = telefono;
         this.contrasena = contrasena;
     }
+
+    public Usuario(String nombre, String apellidos, String email, String telefono) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.telefono = telefono;
+    }
+    
+    
     
     //Getters
 

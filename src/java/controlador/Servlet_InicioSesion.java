@@ -108,19 +108,19 @@ public class Servlet_InicioSesion extends HttpServlet {
                         case 1:
                             // SESSIONES
                             sesion.setAttribute("usuario",usuario);
-                            /*sesion.setAttribute("rol",rol);*/
-                            response.sendRedirect("InicioSesion.jsp");
-                            
+                            sesion.setAttribute("rol",rol);
+                            response.sendRedirect("index.jsp");                          
                             break;
                             
                         case 2:
-                            sesion.setAttribute("admin", 2);
-                            response.sendRedirect("https://www.facebook.com/");
-                            
+                            sesion.setAttribute("usuario",usuario);
+                            sesion.setAttribute("rol",rol);
+                            response.sendRedirect("index.jsp");   
                             break;
                             
                         default:
                             listaErrores.add("Usuario no encontrado");
+                            response.sendRedirect("InicioSesion.jsp");
       
                     }
                     

@@ -23,7 +23,6 @@ public class Leer_Email extends Conexion{
 
             if (rs.next()) {
                 verificaConsulta = rs.getString("email");
-
             }
 
         } catch (SQLException ex) {    
@@ -37,12 +36,7 @@ public class Leer_Email extends Conexion{
         }
             return 0;
         }
-            return 0;
-            
-        
-        
-        
-        
+            return 0; 
        
     }
        

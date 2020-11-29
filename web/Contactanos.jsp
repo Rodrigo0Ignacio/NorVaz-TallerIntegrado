@@ -5,28 +5,32 @@
 HttpSession sesion = request.getSession();
 /* capturamos la sesion del usuario*/
 String usuario = null;
-String estilo = null;
-
-if(sesion.getAttribute("usuario") != null){
-    usuario = sesion.getAttribute("usuario").toString(); 
-}
-
-//Cerrar sesion
-if(request.getParameter("cerrar") != null){
-    sesion.invalidate();
-     response.sendRedirect("index.jsp");
-}
-
-
-/*Variables para cambiar las opciones de sesion (al estar en una sesion cambaran las opciones)*/
+String rol = "0";
+String estiloU = null;
+String estiloA = null;
 String sesionIniciada = null;
 String sinSesion = null;
-// SI EL USUARIO INICIA SESION DE DESPLIEGA EL MENU DE OPCIONES QUE POSEE
-if(usuario == null){
-    estilo = "style=\"display: none\"";
-    sesionIniciada = "style=\"display: none\"";
-} else{
-    sinSesion = "style=\"display: none\"";
+
+if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null ){
+    rol = sesion.getAttribute("rol").toString();
+    usuario = sesion.getAttribute("usuario").toString();
+}
+
+switch (rol){
+    case "1":
+         estiloA = "style=\"display: none\"";
+         sinSesion = "style=\"display: none\""; 
+        break;
+        
+    case "2":
+        estiloU = "style=\"display: none\"";
+        sinSesion = "style=\"display: none\"";
+        break;
+        
+    default:
+        estiloU = "style=\"display: none\"";
+        estiloA = "style=\"display: none\"";
+        sesionIniciada = "style=\"display: none\"";
 }
 %>
 <!DOCTYPE html>
@@ -35,9 +39,21 @@ if(usuario == null){
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/Contactanos-estilos.css" rel="stylesheet" type="text/css"/>
-        <title>JSP Page</title>
+        <title>NorVaz - Contactanos</title>
     </head>
     <body>
+         <!--VENTANA FLOTANTE-->
+        <div class="flotante" id="ventana">
+            <div id="cerrar">
+                <a href="javascript:cerrar()"><img src="img/boton.png"></a>
+
+                <form method="post" action="servlet_Email">
+                    <input class="txt" type="email" name="email" value="" placeholder="Ingresa el Email Asociado a la cuenta"> <br/> <br/>
+                    <input class=" " type="submit" name="enviarCorreo" value="Recuperar contraseña"> 
+                </form>
+
+            </div>
+        </div>
    <div id="contenedor">
         <div id="header">
     
@@ -49,20 +65,17 @@ if(usuario == null){
                 <ul>
                     <li><img class="central" src="img/usuario.png" alt=""></li>
                 </ul>
-                <!--APARTADO DE OPCIONES DE SESION-->
-                
-                <ul <%=sesionIniciada%> >
-                    <li><a href="InicioSesion.jsp"> Bienvenid@ <%=usuario%> </a></li>
-                    <li><a href="index.jsp?cerrar=true"> Cerrar Sesion </a></li>
-                </ul>
+               <!--APARTADO DE OPCIONES DE SESION (USUARIO)-->
+                    <ul <%=sesionIniciada%> >
+                        <li><a href="InicioSesion.jsp"> Bienvenid@ <%=usuario%> </a></li>
+                        <li><a href="index.jsp?cerrar=true">Cerrar Sesion</a></li>
+                    </ul>
 
-                <ul <%=sinSesion%>>
-                    <li><a href=" "> Iniciar Sesion</a></li>
-                    <li><a href=" "> Crear una cuenta</a></li>
-                    <li><a href=" "> olvidaste tu contraseña</a></li>
-                </ul>
-                
-    
+                    <ul <%=sinSesion%> >
+                        <li><a href="InicioSesion.jsp"> Iniciar Sesion</a></li>
+                        <li><a href="InicioSesion.jsp"> Crear una cuenta</a></li>
+                        <li><a href="javascript:abrir()"> olvidaste tu contraseña</a></li>
+                    </ul>
             </div>
     
         </div>
@@ -85,22 +98,32 @@ if(usuario == null){
                     <li><a href="Contactanos.jsp"> Contactanos </a></li>
                 </ul>
             </nav>
-        
-        <div id="barra-usuario1" class="barra-usuario" <%= estilo%>  >
-            <nav class="navegacionUser">
-                 <ul class="menu2">
-        
-                    <li><a href=" "> Editar Perfil </a></li>
-                    <li><a href=" "> Cambiar contraseña </a></li>
-                    <li><a href=" "> Sigue tu despacho </a></li>
-                    <li><a href=" "> Sigue tu despacho </a></li>
-                    <li><a href=" "> Sigue tu despacho </a></li>
-                    <li><a href=" "> <img src="img/carrito.png"> ver carrito </a></li>
-                </ul>
-               
+        <!--ESTE SUB MENU PERTENECE AL USUARIO-->
+            <div id="barra-usuario1" class="barra-usuario" <%= estiloU%>  >
+                <nav class="navegacionUser">
+                    <ul class="menu2">
 
-            </nav>
+                        <li><a href=" "> Editar Perfil </a></li>
+                        <li><a href=" "> Cambiar contraseña </a></li>
+                        <li><a href=" "> Sigue tu despacho </a></li>
+                        <li><a href=" "> Sigue tu despacho </a></li>
+                        <li><a href=" "> Sigue tu despacho </a></li>
+                        <li><a href=" "> <img src="img/carrito.png"> ver carrito </a></li>
+                    </ul>
+                </nav>
+            </div> 
+            <!--ESTE SUB MENU PERTENECE AL ADMINISTRADOR-->
+            <div id="barra-usuario1" class="barra-usuario" <%= estiloA%>  >
+                <nav class="navegacionUser">
+                    <ul class="menu2">
 
+                        <li><a href=" "> Editar Perfil </a></li>
+                        <li><a href=" "> Cambiar contraseña </a></li>
+                        <li><a href=" "> Subir Articulos </a></li>
+                        <li><a href=" "> Eliminar Usuarios </a></li>
+                        <li><a href=" "> varias cosas </a></li>
+                        <li><a href=" "> <img src="img/carrito.png"> ver carrito </a></li>
+                    </ul>
         </div>
         </div>
               
@@ -146,4 +169,6 @@ if(usuario == null){
     </div>
 
     </body>
+    <!--JS DE VETANA FLOTANTE-->
+    <script src="js/ventana-flotante.js" type="text/javascript"></script>
 </html>

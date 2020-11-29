@@ -71,6 +71,8 @@ public class Servlet_InicioSesion extends HttpServlet {
         }
         if(!contrasena.equalsIgnoreCase(contrasena2)){
             listaErrores.add("la contraseña no coincide");
+            
+            response.sendRedirect("InicioSesion.jsp");
         }
         if(listaErrores.isEmpty()){
             

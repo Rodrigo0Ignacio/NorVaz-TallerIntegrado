@@ -1,5 +1,5 @@
 
-<%@page import="Entidad.RegistroUsuario"%>
+<%@page import="Entidad.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
 <%

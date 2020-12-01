@@ -205,10 +205,8 @@ switch (rol){
                            <tr><td></td><td> <input type="submit" name="btn_Registrar" value="Modificar"></td></tr>
         
                     </table>
-                    </form>
-    
-                </div>
-           
+                    </form>   
+                </div>  
         </div>
 
         <div id="fooster">

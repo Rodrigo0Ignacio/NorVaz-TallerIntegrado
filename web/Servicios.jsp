@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Servicios
-    Created on : 24-11-2020, 01:23:43
-    Author     : Rodrigo
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
@@ -20,6 +16,8 @@ if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null 
     rol = sesion.getAttribute("rol").toString();
     usuario = sesion.getAttribute("usuario").toString();
 }
+
+
 
 switch (rol){
     case "1":
@@ -157,7 +155,7 @@ switch (rol){
                     </ul>
                 </div>
                 <div id="Boton">
-                    <button> Contactanos</button>
+                    <button onclick="location.href='usuario-servicios.jsp?servicio=1';">Solicitar</button>
 
                 </div>
                 
@@ -181,7 +179,7 @@ switch (rol){
                     </ul>
                 </div>
                 <div id="Boton">
-                    <button> Contactanos</button>
+                    <button onclick="location.href='usuario-servicios.jsp?servicio=2';"> Solicitar</button>
 
                 </div>
 
@@ -204,7 +202,7 @@ switch (rol){
                     </ul>
                 </div>
                 <div id="Boton">
-                    <button> Contactanos</button>
+                    <button onclick="location.href='usuario-servicios.jsp?servicio=3';"> Solicitar</button>
 
                 </div>
 
@@ -227,7 +225,7 @@ switch (rol){
                     </ul>
                 </div>
                 <div id="Boton">
-                    <button> Contactanos</button>
+                    <button onclick="location.href='usuario-servicios.jsp?servicio=4';"> Solicitar </button>
 
                 </div>
 

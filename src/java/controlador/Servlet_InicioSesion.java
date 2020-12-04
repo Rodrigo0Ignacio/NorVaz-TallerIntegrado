@@ -21,11 +21,10 @@ import modelo.Leer_Usuario;
  */
 public class Servlet_InicioSesion extends HttpServlet {
 
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         int advertencia = 0;
         ArrayList listaErrores = new ArrayList();
         Usuario usuario1 = new Usuario();
@@ -33,7 +32,7 @@ public class Servlet_InicioSesion extends HttpServlet {
         Leer_Usuario validaRoles = new Leer_Usuario();
         // SESION
         HttpSession sesion = request.getSession();
-        
+
         //DATOS PARA REGISTRAR
         String nombre = request.getParameter("txt_regisNombre");
         String apellidos = request.getParameter("txt_regisApellido");
@@ -43,87 +42,92 @@ public class Servlet_InicioSesion extends HttpServlet {
         String contrasena = request.getParameter("txt_regisConfirmaContrasena");
         String contrasena2 = request.getParameter("txt_regisContrasena");
         String botonRegistrar = request.getParameter("btn_Registrar");
-        
+
         // DATOS PARA VALIDAR LA SESION
         String usuario = request.getParameter("txt_verificarUsuario");
         String contrasenau = request.getParameter("txt_verificarPassword");
         String botonIngresar = request.getParameter("btn_Validar");
-        
-        if(botonRegistrar != null){
 
-        if(nombre == null){
-            listaErrores.add("El nombre es oblogatorio");
-        }
-        if(apellidos == null){
-            listaErrores.add("El apellido es oblogatorio");
-        }
-        if(email == null){
-            listaErrores.add("El email es oblogatorio");
-        }
-        if(rut == null){
-            listaErrores.add("El rut es oblogatorio");
-        }
-        if(telefono == null){
-            listaErrores.add("El telefono es oblogatorio");
-        }
-        if(contrasena == null){
-            listaErrores.add("la contraseña es oblogatoria");
-        }
-        if(!contrasena.equalsIgnoreCase(contrasena2)){
-            listaErrores.add("la contraseña no coincide");
-            
-            response.sendRedirect("InicioSesion.jsp");
-        }
-        if(listaErrores.isEmpty()){
-            
-            usuario1.setNombre(nombre);
-            usuario1.setApellidos(apellidos);
-            usuario1.setEmail(email);
-            usuario1.setRut(rut);
-            usuario1.setTelefono(telefono);
-            usuario1.setContrasena(contrasena);
-            
-            try {
-                advertencia = valida.RegistrarUsuario(usuario1);
-            } catch (SQLException ex) {
-                Logger.getLogger(Servlet_InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+        if (botonRegistrar != null) {
+
+            if (nombre == null) {
+                listaErrores.add("El nombre es oblogatorio");
             }
-            response.sendRedirect("InicioSesion.jsp?validador=" + advertencia);
-        }
-        } else{
-            if(botonIngresar != null){
-                
-                if(usuario == null){
+            if (apellidos == null) {
+                listaErrores.add("El apellido es oblogatorio");
+            }
+            if (email == null) {
+                listaErrores.add("El email es oblogatorio");
+            }
+            if (rut == null) {
+                listaErrores.add("El rut es oblogatorio");
+            }
+            if (telefono == null) {
+                listaErrores.add("El telefono es oblogatorio");
+            }
+            if (contrasena == null) {
+                listaErrores.add("la contraseña es oblogatoria");
+            }
+            if (!contrasena.equalsIgnoreCase(contrasena2)) {
+                listaErrores.add("la contraseña no coincide");
+
+                response.sendRedirect("InicioSesion.jsp");
+            }
+            if (listaErrores.isEmpty()) {
+
+                usuario1.setNombre(nombre);
+                usuario1.setApellidos(apellidos);
+                usuario1.setEmail(email);
+                usuario1.setRut(rut);
+                usuario1.setTelefono(telefono);
+                usuario1.setContrasena(contrasena);
+
+                try {
+                    advertencia = valida.RegistrarUsuario(usuario1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Servlet_InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("InicioSesion.jsp?validador=" + advertencia);
+            }
+        } else {
+            if (botonIngresar != null) {
+
+                if (usuario == null) {
                     listaErrores.add("ingrese su email");
                 }
-                if(contrasenau == null){
+                if (contrasenau == null) {
                     listaErrores.add("ingrese su contraseña");
                 }
-                if(listaErrores.isEmpty()){
-                    
+                if (listaErrores.isEmpty()) {
+
                     usuario1.setEmail(usuario);
                     usuario1.setContrasena(contrasenau);
-                    
+
+                    // llamamos a un metodo para capturar el nombre y el rut
+                    validaRoles.listaRut(usuario1);
+
                     int rol = validaRoles.validarUsuarios(usuario1);
 
-                    switch(rol){
+                    switch (rol) {
                         case 1:
                             // SESSIONES
-                            sesion.setAttribute("usuario",usuario);
-                            sesion.setAttribute("rol",rol);
-                            response.sendRedirect("index.jsp");                          
+                            sesion.setAttribute("usuario", usuario);
+                            sesion.setAttribute("nombre", usuario1.getNombre());
+                            sesion.setAttribute("rut", usuario1.getRut());
+                            sesion.setAttribute("rol", rol);
+                            response.sendRedirect("index.jsp");
                             break;
-                            
+
                         case 2:
-                            sesion.setAttribute("usuario",usuario);
-                            sesion.setAttribute("rol",rol);
-                            response.sendRedirect("index.jsp");   
+                            sesion.setAttribute("usuario", usuario);
+                            sesion.setAttribute("rol", rol);
+                            response.sendRedirect("index.jsp");
                             break;
-                            
+
                         default:
                             listaErrores.add("Usuario no encontrado");
                             response.sendRedirect("InicioSesion.jsp");
-      
+
                     }
                     
                 }  

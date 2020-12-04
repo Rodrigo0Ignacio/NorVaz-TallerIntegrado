@@ -9,6 +9,7 @@
 <%  
 HttpSession sesion = request.getSession();
 /* capturamos la sesion del usuario*/
+String nombre = null;
 String usuario = null;
 String rol = "0";
 String estiloU = null;
@@ -19,6 +20,7 @@ String sinSesion = null;
 if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null ){
     rol = sesion.getAttribute("rol").toString();
     usuario = sesion.getAttribute("usuario").toString();
+    nombre = sesion.getAttribute("nombre").toString();
 }
 
 switch (rol){
@@ -71,7 +73,7 @@ switch (rol){
                 </ul>
                  <!--APARTADO DE OPCIONES DE SESION (USUARIO)-->
                     <ul <%=sesionIniciada%> >
-                        <li><a href="InicioSesion.jsp"> Bienvenid@ <%=usuario%> </a></li>
+                        <li><a href="InicioSesion.jsp"> Bienvenid@ <%=nombre%> </a></li>
                         <li><a href="index.jsp?cerrar=true">Cerrar Sesion</a></li>
                     </ul>
 

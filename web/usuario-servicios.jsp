@@ -5,6 +5,8 @@
 <%
     HttpSession sesion = request.getSession();
     /* capturamos la sesion del usuario*/
+    String nombre = null;
+    String rut = null;
     String usuario = null;
     String rol = "0";
     String estiloU = null;
@@ -21,6 +23,8 @@
     if (sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null) {
         rol = sesion.getAttribute("rol").toString();
         usuario = sesion.getAttribute("usuario").toString();
+        nombre = sesion.getAttribute("nombre").toString();
+        rut = sesion.getAttribute("rut").toString();
     }
     // si la sesion es nula me redirecciona a otra pagina, sino
 // capturara la variable que viene del servicios
@@ -108,7 +112,7 @@
 
                     <!--APARTADO DE OPCIONES DE SESION (USUARIO)-->
                     <ul <%=sesionIniciada%> >
-                        <li><a href="InicioSesion.jsp"> Bienvenid@ <%=usuario%> </a></li>
+                        <li><a href="InicioSesion.jsp"> Bienvenid@ <%=nombre%> </a></li>
                         <li><a href="index.jsp?cerrar=true">Cerrar Sesion</a></li>
                     </ul>
 
@@ -178,13 +182,12 @@
             <div id="contenido">
                 <div class="InisiarSesion">
                     <h2>Ingresar un Servicio</h2>
-                    <form action="Servlet_InicioSesion" method="post">
+                    <form action="servlet_servicio" method="get">
                         <table>
-                            <tr><br> <h3> <td><br></td><td></td></tr>
                                 <tr><td><br></td><td></td></tr>
-                                <tr><td><br>Servicio</td><td>
+                                <tr><td><br><h3>Servicio</h3></td><td>
 
-                                        <select name="servicios">
+                                        <select name="op_servicios">
                                             <option <%=opcion1%>>Servicio de Gafiteria</option>
                                             <option <%=opcion2%>>Mantenimiento</option>
                                             <option <%=opcion3%>>Servicios de Pintura</option>
@@ -194,20 +197,21 @@
                                     </td></tr>
 
                                 <tr><td><br></td><td></td></tr>
-                                <tr><td>Poblacion o villa* </td><td><input type="email" value="" name="txt_regisEmail" placeholder="ejmplo: San Antonio, cerro arenas,"></td></tr>
+                                <tr><td>Poblacion o villa* </td><td><input type="text" value="" name="txt_poblacion_villa" placeholder="ejmplo: San Antonio, cerro arenas,"></td></tr>
                                 <tr><td><br></td><td></td></tr>
-                                <tr><td>Calle* </td><td><input type="email" value="" name="txt_regisEmail" placeholder="ejmplo: Manuel Blanco Encalada"></td></tr>
+                                <tr><td>Calle* </td><td><input type="text" name="txt_calle" placeholder="ejmplo: Manuel Blanco Encalada"></td></tr>
                                 <tr><td><br></td><td></td></tr>
-                                <tr><td>Numero de casa o departamento* </td><td><input type="text" value="" name="txt_regisRut" placeholder=""></td></tr>
+                                <tr><td>Numero de casa o departamento* </td><td><input type="text" name="txt_NCasa" placeholder=""></td></tr>
                                 <tr><td><br></td><td></td></tr>
-                                <tr><td>Telefono* </td><td><input type="tel" value="" name="txt_regisTelefono" placeholder="ejemplo: 98745632"></td></tr>
+                                <tr><td>Telefono* </td><td><input type="tel"  name="txt_telefono" placeholder="ejemplo: 98745632"></td></tr>
                                 <tr><td><br></td><td></td></tr>
-                                <tr><td>Ingrese una descripcion de su problema* </td><td><textarea cols="" >
-                               
+                                <tr><td>Ingrese una descripcion de su problema* </td><td><textarea name="textA_requerimiento" cols="35" rows="6" placeholder="Ingrese su requerimiento, de forma detallada."></textarea>
                                         </textarea></td></tr>
                                 <tr><td><br></td><td></td></tr>
-
-                                <tr><td></td><td> <input type="submit" name="btn_Validar" value="Solicitar Servicio"></td></tr>
+                                <tr><td></td><td><input type="hidden" value="<%=rut%>" name="rut"></td></tr>
+                                <tr><td></td><td><input type="hidden" value="<%=usuario%>" name="email"></td></tr>
+                                <tr><td></td><td> <input type="submit" name="btn_solicitar" value="Solicitar Servicio"> </td></tr>
+                               
                         </table>
                     </form>
 

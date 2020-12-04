@@ -1,6 +1,7 @@
 
 package modelo;
 
+import Entidad.Servicio;
 import Entidad.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
@@ -59,7 +60,26 @@ public class Leer_Usuario extends Conexion{
         }
         return 1;
     }
+    
+    // este metodo cirve para obtener el nombre y el rut del usuario
+    public int listaRut(Usuario usuario){
+        try {
+            super.query = "SELECT * FROM usuario"
+                    + " WHERE email = '" + usuario.getEmail() + "'";
 
+            super.st = (Statement) conectar().createStatement();
+            super.rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setRut(rs.getString("rut"));
+            }
+        } catch (SQLException ex) {
+            return 0;
+
+        }
+        return 1;
+    }
 
   
 }

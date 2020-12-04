@@ -36,15 +36,5 @@ public class Actualizar_Usuario extends Conexion {
 
 
 
-
-
-
-
-
-
-
-
-
-
     
 }

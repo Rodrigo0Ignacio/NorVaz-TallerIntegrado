@@ -7,15 +7,11 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Email;
 import modelo.Leer_Email;
 
 /**
@@ -33,64 +29,36 @@ public class Servlet_Email extends HttpServlet {
 
         String correoReceptor = request.getParameter("email");
         String boton = request.getParameter("enviarCorreo");
-      
-        // DATOS DEL CORREO REMITENTE
-        String correoRemitente = "norvazsancarlos@gmail.com";
-        String passwordRemitente = "norvaz2020";
-        
+
         // GENERAR CLAVE ALEATORIA
-        String claveAleatoria = UUID.randomUUID().toString().toUpperCase().substring(0,15);
+        String claveAleatoria = UUID.randomUUID().toString().toUpperCase().substring(0, 15);
 
         // CONTENIDO DEL CORREO
         String asunto = "NorVaz - Restablecer contraseña";
-        String contenido = "Tu clave es: "+claveAleatoria+"\n-------------------------------------------\n"
-                +"Recomendamos al iniciar sesion cambiarla."
-                + "\nSaludos cordiales.\n"+"\n-------------------------------------------\n"
+        String contenido = "Tu clave es: " + claveAleatoria + "\n-------------------------------------------\n"
+                + "Recomendamos al iniciar sesion cambiarla."
+                + "\nSaludos cordiales.\n" + "\n-------------------------------------------\n"
                 + "NorVaz Tu lo imaginas, nosotros lo creamos :)";
 
         // PREGUNTAMOS SI LAS VARIABLES ESTAN VACIAS
         if (boton != null) {
             if (correoReceptor != null) {
-                if (verificaEmail.ComprobarCorreo(correoReceptor) == 1){
+                if (verificaEmail.ComprobarCorreo(correoReceptor) == 1) {
 
                     verificaEmail.ModificarCorreo(correoReceptor, claveAleatoria);
-
-                    //CORREO
-                    Properties props = new Properties();
-                    props.setProperty("mail.smtp.host", "smtp.gmail.com");
-                    props.setProperty("mail.smtp.starttls.enable", "true");
-                    props.setProperty("mail.smtp.port", "587");
-                    props.setProperty("mail.smtp.auth", "true");
-                    props.setProperty("mail.smtp.user", correoRemitente);
-                    props.setProperty("mail.smtp.clave", passwordRemitente);
-
-                    Session session = Session.getDefaultInstance(props);
-                    MimeMessage mensaje = new MimeMessage(session);
-
-                    try {
-                        mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
-                        mensaje.setSubject(asunto);
-                        mensaje.setText(contenido);
-
-                        Transport transporte = session.getTransport("smtp");
-                        transporte.connect("smtp.gmail.com", correoRemitente, passwordRemitente);
-                        transporte.sendMessage(mensaje, mensaje.getAllRecipients());
-                        transporte.close();
-
-                        listaErrores.add("se envio un correo a tu cuenta");
-                        response.sendRedirect("index.jsp");
-
-                    } catch (Exception e) {
-                        listaErrores.add("Error al enviar correo");
-                        response.sendRedirect("index.jsp");
-                    }
-                } else {
-                    response.sendRedirect("index.jsp");
                 }
+                // creamos una instancia de la clase Email para enviar el correo
+                Email correo = new Email();
+
+                listaErrores.add(correo.EnviarEmail(correoReceptor, asunto, contenido));
+                response.sendRedirect("index.jsp");
+
             } else {
-                listaErrores.add("ingrese su email");
                 response.sendRedirect("index.jsp");
             }
+        } else {
+            listaErrores.add("ingrese su email");
+            response.sendRedirect("index.jsp");
         }
 
     }

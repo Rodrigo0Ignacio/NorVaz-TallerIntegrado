@@ -1,4 +1,3 @@
-
 package controlador;
 
 import Entidad.Usuario;
@@ -20,11 +19,12 @@ public class Servlet_usuario_Editar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Usuario usuario1 = new Usuario(); 
+
+        Usuario usuario1 = new Usuario();
         Actualizar_Usuario actualiza = new Actualizar_Usuario();
         ArrayList listaErrores = new ArrayList();
         int telefono = 0;
+        int verifica = 0;
         String mensaje = null;
 
         //CAPTURAMOS los datos de restablecer password
@@ -35,10 +35,11 @@ public class Servlet_usuario_Editar extends HttpServlet {
 
         // capturamos los datos de editar datos
         String restablecerDatos = request.getParameter("btn_Registrar");
-        String nombre = request.getParameter("txt_regisNombre");
-        String apellido = request.getParameter("txt_regisApellido");
-        String email1 = request.getParameter("txt_regisEmail1");
-        String email2 = request.getParameter("txt_regisEmail2");
+        String nombre = request.getParameter("txt_camNombre");
+        String apellido = request.getParameter("txt_camApellido");
+        String email1 = request.getParameter("txt_camEmail1");
+        String email2 = request.getParameter("txt_camEmail2");
+        String rut = request.getParameter("rut");
 
         // cambiar contraseña
         if (restablecerPass != null) {
@@ -67,7 +68,7 @@ public class Servlet_usuario_Editar extends HttpServlet {
                 usuario1.setEmail(correo);
 
                 // capturamos lo que arroja el metodo 
-                int verifica = actualiza.actualizarPassword(usuario1);
+                verifica = actualiza.actualizarPassword(usuario1);
 
                 if (verifica == 1) {
                     mensaje = "La contraseña se cambio exitosamente.";
@@ -89,7 +90,7 @@ public class Servlet_usuario_Editar extends HttpServlet {
 
             // valida si el telefono es numerico
             try {
-                telefono = Integer.parseInt(request.getParameter("txt_regisTelefono"));
+                telefono = Integer.parseInt(request.getParameter("txt_camTelefono"));
 
             } catch (NumberFormatException e) {
                 listaErrores.add("Solo se admiten valores numericos");
@@ -109,49 +110,43 @@ public class Servlet_usuario_Editar extends HttpServlet {
             if (!email1.equalsIgnoreCase(email2)) {
                 listaErrores.add("El Email no coincide");
             }
-            if (nombre == null) {
-                listaErrores.add("El Email no coincide");
-            }
-            if (String.valueOf(telefono) != null) {
+            if (String.valueOf(telefono) == null) {
                 listaErrores.add("Ingrese un numero celular");
-
             }
+            
+            String telefonocambiado = String.valueOf(telefono).trim();
 
             if (listaErrores.isEmpty()) {
-
+                usuario1.setRut(rut);
                 usuario1.setNombre(nombre);
                 usuario1.setApellidos(apellido);
                 usuario1.setEmail(email2);
+                usuario1.setTelefono(telefonocambiado);
+                
+                // capturamos lo que arroja el metodo al actualizar los datos
+                verifica = actualiza.ActualizarDatos(usuario1);
+                
+                if (verifica == 1) {
+                    mensaje = "La contraseña se cambio exitosamente.";
 
-                /* codigo de metodos*/
+                    request.setAttribute("mensaje", mensaje);
+                    request.getRequestDispatcher("usuario-Editar.jsp").forward(request, response);
+                } else {
+                    mensaje = "Error al cambiar";
+                    request.setAttribute("mensaje", mensaje);
+                    request.getRequestDispatcher("usuario-Editar.jsp").forward(request, response);
+
+                    /* codigo de metodos*/
+                }
+                request.setAttribute("listaErrores", listaErrores);
+                request.getRequestDispatcher("usuario-Editar.jsp").forward(request, response);
+
             }
-            request.setAttribute("listaErrores", listaErrores);
-            request.getRequestDispatcher("usuario-Editar.jsp").forward(request, response);
-
         }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
+
+
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

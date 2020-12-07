@@ -3,6 +3,8 @@ package modelo;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,8 +15,8 @@ import javax.swing.JOptionPane;
 public class Leer_Email extends Conexion{
     
     // Comprueba si existe un correo en la base de datos.
-    public int ComprobarCorreo(String correo) throws SQLException {
-        String verificaConsulta = null;
+    public int ComprobarCorreo(String correo){
+        String verificaConsulta = "";
         
         super.query = "SELECT email FROM usuario WHERE email = '"+correo+"'";
         try {
@@ -28,30 +30,37 @@ public class Leer_Email extends Conexion{
         } catch (SQLException ex) {    
            return 0; 
         }
-        st.close();
-        if(verificaConsulta != null){
+        try {
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Leer_Email.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(verificaConsulta.equalsIgnoreCase("")){
+        return 0;
         
-        if (verificaConsulta.equalsIgnoreCase(correo)) {
+        } else{
             return 1;
         }
-            return 0;
-        }
-            return 0; 
+      
        
     }
        
        // SI EL CORREO COINCIDE SE MODIFICARA EL PASSWROD
-       public int ModificarCorreo(String correo, String password) throws SQLException{
-           super.query = "update usuario set contrasena = '"+password+"' where email ='"+correo+"'";
+       public int ModificarCorreo(String correo, String password){
+           super.query = "update usuario set contraseNa = '"+password+"' where email ='"+correo+"'";
            
            try {
                super.st = (Statement) conectar().createStatement();
                super.resultado = st.executeUpdate(query);
 
            } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, "error");
+               JOptionPane.showMessageDialog(null, "error al moodificar correo");
            }
-           st.close();
+        try {
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Leer_Email.class.getName()).log(Level.SEVERE, null, ex);
+        }
            
            // si encuenta el correo arojara 1 y posteriormente crearemos la contraseña de numeros
           

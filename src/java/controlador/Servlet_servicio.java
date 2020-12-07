@@ -39,6 +39,7 @@ public class Servlet_servicio extends HttpServlet {
             String descripcion = request.getParameter("textA_requerimiento");
             String emailReceptor = request.getParameter("email");
             String botonSolicitar = request.getParameter("btn_solicitar");
+        
             
             // datos de correo
             String asunto = "Solicitud de Servicio recibida";

@@ -120,6 +120,8 @@ public class Servlet_InicioSesion extends HttpServlet {
 
                         case 2:
                             sesion.setAttribute("usuario", usuario);
+                            sesion.setAttribute("nombre", usuario1.getNombre());
+                            sesion.setAttribute("rut", usuario1.getRut());
                             sesion.setAttribute("rol", rol);
                             response.sendRedirect("index.jsp");
                             break;

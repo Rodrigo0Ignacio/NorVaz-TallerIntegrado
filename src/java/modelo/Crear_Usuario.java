@@ -16,10 +16,10 @@ public class Crear_Usuario extends Conexion{
     
 
 // Registro solo para usuarios
-    public int RegistrarUsuario(Usuario usuario) throws SQLException{
-        super.query = "INSERT INTO usuario VALUES(1,'"+usuario.getRut()+"','"+usuario.getNombre()+"','"
+    public int RegistrarUsuario(Usuario usuario){
+        super.query = "INSERT INTO usuario VALUES('"+usuario.getRut()+"','"+usuario.getNombre()+"','"
                 +usuario.getApellidos()+"','"+usuario.getEmail()+"','"+usuario.getTelefono()+"','"+
-                usuario.getContrasena()+"')";
+                usuario.getContrasena()+"',1)";
         try {
             super.st = (Statement) conectar().createStatement();
             super.resultado = st.executeUpdate(query);
@@ -27,7 +27,11 @@ public class Crear_Usuario extends Conexion{
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"error registraUsuario");
         }
-        st.close();
+        try {
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crear_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(resultado == 1){
             return 1;
             

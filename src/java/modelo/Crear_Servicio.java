@@ -2,11 +2,8 @@
 package modelo;
 
 import Entidad.Servicio;
-import Entidad.Usuario;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,9 +14,11 @@ public class Crear_Servicio extends Conexion{
     
     
    public int registrarServicio(Servicio servicio){
+       String fechaActual = Fecha.fechaActual(); // retorna la fecha actual
+       
         super.query = "INSERT INTO servicio VALUES('"+ servicio.getRut()+"','"+ servicio.getTipo()+"','"
                 +servicio.getPoblacion()+"','"+servicio.getCalle()+
-                "','"+servicio.getNroHome()+"','"+servicio.getTelefono()+"','"+servicio.getDescripcion()+"')";
+                "','"+servicio.getNroHome()+"','"+servicio.getTelefono()+"','"+fechaActual+"','"+servicio.getDescripcion()+"')";
         try {
             super.st = (Statement) conectar().createStatement();
             super.resultado = st.executeUpdate(query);

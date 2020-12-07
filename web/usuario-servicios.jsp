@@ -1,7 +1,10 @@
 
+<%@page import="modelo.Fecha"%>
 <%@page import="Entidad.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
+
+
 <%
     HttpSession sesion = request.getSession();
     /* capturamos la sesion del usuario*/
@@ -19,6 +22,8 @@
     String opcion2 = null;
     String opcion3 = null;
     String opcion4 = null;
+    
+    
 
     if (sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null) {
         rol = sesion.getAttribute("rol").toString();
@@ -83,6 +88,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/usuario-servicios-estilos.css" rel="stylesheet" type="text/css"/>
+        
         <title>NorVaz - Ingresar un servicio</title>
     </head>
     <body>
@@ -211,6 +217,7 @@
                                 <tr><td></td><td><input type="hidden" value="<%=rut%>" name="rut"></td></tr>
                                 <tr><td></td><td><input type="hidden" value="<%=usuario%>" name="email"></td></tr>
                                 <tr><td></td><td> <input type="submit" name="btn_solicitar" value="Solicitar Servicio"> </td></tr>
+                                
                                
                         </table>
                     </form>

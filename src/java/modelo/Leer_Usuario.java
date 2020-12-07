@@ -20,14 +20,14 @@ public class Leer_Usuario extends Conexion{
         int verificaConsulta = 0;
         
         try {
-            super.query = "SELECT id FROM usuario WHERE email ='" + usuario.getEmail()
-                    + "' AND contrasena = '" + usuario.getContrasena() + "'";
+            super.query = "SELECT id_2roles FROM usuario WHERE email ='" + usuario.getEmail()
+                    + "' AND contraseNa = '" + usuario.getContrasena() + "'";
 
             super.st = (Statement) conectar().createStatement();
             super.rs = st.executeQuery(query);
 
             if (rs.next()) {
-                verificaConsulta = rs.getInt("id");
+                verificaConsulta = rs.getInt("id_2roles");
             }
 
         } catch (SQLException ex) {
@@ -38,7 +38,7 @@ public class Leer_Usuario extends Conexion{
 
     }
 
-    public int listarDatosUsuario(Usuario usuario) throws SQLException {
+    public int listarDatosUsuario(Usuario usuario){
         try {
             super.query = "SELECT * FROM usuario"
                     + " WHERE email = '" + usuario.getEmail() + "'";

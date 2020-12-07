@@ -9,6 +9,7 @@ HttpSession sesion = request.getSession();
 String nombre = null;
 String usuario = null;
 String rol = "0";
+String rut = null;
 String estiloU = null;
 String estiloA = null;
 String sesionIniciada = null;
@@ -18,6 +19,7 @@ if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null 
     rol = sesion.getAttribute("rol").toString();
     usuario = sesion.getAttribute("usuario").toString();
     nombre = sesion.getAttribute("nombre").toString();
+    rut = sesion.getAttribute("rut").toString();
 }
 
 // VISTA DE DATOS DE USUARIO
@@ -194,15 +196,17 @@ switch (rol){
 
                         <tr><br><td><br></td><td></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Nombre* </td><td><input type="text" value="<%=user.getNombre()%>" name="txt_regisNombre"></td></tr>
+                           <tr><td>Nombre* </td><td><input type="text" value="<%=user.getNombre()%>" name="txt_camNombre"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Apellidos* </td><td><input type="text" value="<%=user.getApellidos()%>" name="txt_regisApellido"></td></tr>
+                           <tr><td>Apellidos* </td><td><input type="text" value="<%=user.getApellidos()%>" name="txt_camApellido"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Email* </td><td><input type="email" value="<%=user.getEmail()%>" name="txt_regisEmail1" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
+                           <tr><td>Email* </td><td><input type="email" value="<%=user.getEmail()%>" name="txt_camEmail1" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>confirmar Email* </td><td><input type="email" value="<%=user.getEmail()%>" name="txt_regisEmail2" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
+                           <tr><td>Confirmar Email* </td><td><input type="email" value="<%=user.getEmail()%>" name="txt_camEmail2" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
                            <tr><td><br></td><td></td></tr>
-                           <tr><td>Telefono* </td><td><input type="tel" value="<%=user.getTelefono()%>" name="txt_regisTelefono" placeholder="ejemplo: 98745632"></td></tr>
+                           <tr><td>Telefono* </td><td><input type="tel" value="<%=user.getTelefono()%>" name="txt_camTelefono" placeholder="ejemplo: 98745632"></td></tr>
+                           <tr><td><br></td><td></td></tr>
+                           <tr><td></td><td><input type="hidden" value="<%=rut%>" name="rut"></td></tr>
                            <tr><td><br></td><td></td></tr>
                            <tr><td></td><td> <input type="submit" name="btn_Registrar" value="Modificar"></td></tr>
         

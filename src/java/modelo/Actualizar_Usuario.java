@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class Actualizar_Usuario extends Conexion {
 
     public int actualizarPassword(Usuario usuario) {
-        super.query = "update usuario set contrasena = '" + usuario.getContrasena()
+        super.query = "update usuario set contraseNa = '" + usuario.getContrasena()
                 + "' where email ='" + usuario.getEmail() + "'";
 
         try {
@@ -28,10 +28,25 @@ public class Actualizar_Usuario extends Conexion {
         return 1;
     }
 
+    /*POR TERMINAR*/
     public int ActualizarDatos(Usuario usuario) {
-        
 
-        return 0;
+        super.query = "update usuario set nombre = '" + usuario.getNombre()+
+                "' ,apellidos = '" + usuario.getApellidos()+
+                "', email = '" + usuario.getEmail() + "', telefono = '" +
+                usuario.getTelefono()+ "' WHERE rut = '" + usuario.getRut() + "'";
+        try {
+            super.st = (Statement) conectar().createStatement();
+            st.executeUpdate(query);
+
+            st.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al actualizar los datos");
+            return 0;
+        }
+        return 1;
+
     }
 
 

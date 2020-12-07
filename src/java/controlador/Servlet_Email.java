@@ -46,11 +46,13 @@ public class Servlet_Email extends HttpServlet {
                 if (verificaEmail.ComprobarCorreo(correoReceptor) == 1) {
 
                     verificaEmail.ModificarCorreo(correoReceptor, claveAleatoria);
+                    
+                    // creamos una instancia de la clase Email para enviar el correo
+                    Email correo = new Email();
+                    correo.EnviarEmail(correoReceptor, asunto, contenido);
                 }
-                // creamos una instancia de la clase Email para enviar el correo
-                Email correo = new Email();
+                
 
-                listaErrores.add(correo.EnviarEmail(correoReceptor, asunto, contenido));
                 response.sendRedirect("index.jsp");
 
             } else {

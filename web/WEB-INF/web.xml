@@ -28,6 +28,10 @@
         <servlet-name>Servlet_EditarAdministrador</servlet-name>
         <servlet-class>controlador.Servlet_EditarAdministrador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_Producto</servlet-name>
+        <servlet-class>controlador.Servlet_Producto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_index</servlet-name>
         <url-pattern>/servlet_index</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>Servlet_EditarAdministrador</servlet-name>
         <url-pattern>/servlet_EditarAdministrador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_Producto</servlet-name>
+        <url-pattern>/servlet_Producto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

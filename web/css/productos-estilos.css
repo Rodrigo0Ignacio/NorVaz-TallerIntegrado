@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+body{
+    background-color: #ffffff;
+}
+
+#contenedor{
+    width: 95%;
+    padding: 2px;
+    margin: 1px auto;
+  /*  background-color: blue;*/
+}
+#header{
+    padding: 2px;
+  /*  background: rgb(10, 134, 72); */
+}
+
+/*al iniciar una sesion aparecera esta barra*/
+.barra-usuario{
+
+
+}
+.navegacionUser{
+    width: 90%;
+    margin: 2px auto;
+    background: #e6dddd;
+    border-radius: 15px;
+    border:black 0.5px solid;
+}
+
+
+.navegacionUser ul{
+    list-style: none;
+    border-radius: 5px;
+}
+
+.menu2 > li{
+	position: relative;
+	display: inline-block;
+}
+
+.menu2 > li > a{
+	display: block;
+	padding: 15px 20px;
+	color: #353535;
+	text-decoration: none;
+}
+
+.menu2 li a:hover{
+	color: #CE7D35;
+	transition: all .3s;
+}
+
+.menu2 img{
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+#nav1{
+  /*  background: #990b0b; */
+}
+
+
+.navegacion{
+	width: 100%;
+	margin: 5px auto;
+    background: #e6dddd;
+    border-radius: 10px;
+    border:black 0.5px solid;
+}
+
+
+.navegacion ul{
+    list-style: none;
+    border-radius: 5px;
+}
+
+.menu > li{
+	position: relative;
+	display: inline-block;
+}
+
+.menu > li > a{
+	display: block;
+	padding: 15px 20px;
+	color: #353535;
+	text-decoration: none;
+}
+
+.menu li a:hover{
+	color: #CE7D35;
+	transition: all .3s;
+}
+
+/* Submenu*/
+
+.submenu{
+	position: absolute;
+	background: #333333;
+	width: 120%;
+	visibility: hidden;
+	opacity: 0;
+    transition: opacity 1.5s;
+    border-radius: 3px;
+}
+
+.submenu li a{
+	display: block;
+	padding: 15px;
+	color: #fff;
+	text-decoration: none;
+}
+
+.menu li:hover .submenu{
+	visibility: visible;
+	opacity: 1;
+}
+
+/*Publicidad apartado de fotos en movimiento*/
+#publicidad{
+    padding: 3px;
+   /* background: #0b992f; */
+    padding: 3px;
+    border: #333333  solid 0.5px;
+  }
+ 
+
+  
+  
+
+/*--------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+#contenido{
+    background-color:lightslategrey;
+display:flex;
+
+}
+
+#menuproductos{
+width:15%;
+min-width: 130px;
+margin-left: 2%;
+margin-top: 2%;
+margin-bottom: 2%;
+border:solid 2px #fff;
+text-align: center;
+color:#fff;
+border-radius: 10px;
+}
+
+#menuproductos ul{
+    position:relative;
+    margin-left: 25%;
+    margin-right: 75%;
+    padding:5px;
+    border-radius: 20px;
+}
+#menuproductos input{
+    border-radius: 10px;
+}
+
+#productos{
+    width:80%;
+    margin: 3%;
+    min-width: 230px;
+    border: solid 2px #fff;
+    
+}
+
+#productos article{
+    display:inline-block;
+}
+
+.producto{
+    max-width:300px;
+    
+    margin:1%;
+    min-width: 250px;
+    background: #e6dddd;
+    border: solid 0.5px black;
+    border-radius: 10px;
+}
+/*imagen del producto descripcion y boton*/
+
+#imagenProducto{
+    
+}
+#imagenProducto img{
+    margin-top:20px;
+    margin-left: 15%;
+    max-height: 180px;
+    width: 70%;
+    margin-right: 15%;
+    
+}
+
+#Boton{
+    padding: 10px;
+    margin:10px;
+   /* border: solid 0.5px #b48888; */
+}
+
+#Boton button{
+    width: 70%;
+font-size: 15px;
+min-width:70px;
+margin-left: 13%;
+margin-right: 13%;
+}
+
+#detalles{
+    width: 80%;
+    margin:20px;
+}
+
+#detalles li{
+    list-style: none;
+    font-size: 15px;
+    text-align: justify;
+}
+
+
+#fooster{
+    background: #535151;
+    padding: 3px;
+    margin: 30px auto;
+    color: #fff;
+}
+/*imagenes del header */
+#logo img{
+    height: 140px;
+    width: 400px;
+    padding: 2px;
+    border-radius: 3px;
+    float: left;
+    border: solid 0.5px black;
+}
+
+#CuentaUser{
+    border: solid 0.5px black;
+    height: 140px;
+    width: 300px;
+    padding: 2px;
+    border-radius: 3px;
+    margin-left: auto;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #e6dddd;
+
+}
+#CuentaUser ul {
+    list-style: none;
+    text-decoration: none;
+}
+#CuentaUser img {
+    height: 60px;
+    width: 60px;    
+}
+
+#CuentaUser li a:hover{
+	color: #CE7D35;
+	transition: all .3s;
+}
+
+/* ventana flotante */
+
+.flotante{
+
+    background-color: #4e4b4b;
+    color: #e6dddd;
+    width: 38%;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    position: fixed;
+    left: 29%;
+    top: 32%;
+    display: none;
+    padding: 50px;
+
+    
+}
+
+#contenedor-gris{
+    width: 100%;
+    position: fixed;
+    background: rgba(0, 0,0, 0.6)
+}
+
+#cerrar img{
+    position: absolute;
+    right: 1px;
+    height: 30px;
+    width: 30px;
+    top: -5px;
+
+}
+
+/*estilos de ventana flotante*/
+
+
+.txt{
+width: 500px;
+height: 40px;
+text-align: center;
+border-radius: 5px;
+
+}
+
+#cerrar button{
+    background-color: #2354b68c;
+    height: 40px;
+    width: 200px;
+    border-radius: 5px;
+    color: blanchedalmond
+
+}
+
+/*estilo del producto y sus detalles*/
+#ver_productos{
+
+}
+
+#imgproducto{
+    display:flex
+}
+
+#imgproducto img{
+    border-right:solid 0.5px cornflowerblue ;
+    width:35%;
+    padding-right: 5%;
+    margin:2%;
+    border-radius: 10px;
+    min-width: 250px;
+    max-width: 350px;
+}
+
+#tabla {
+    width:60%;
+    min-width:350px;
+}
+
+#primerafila td{
+    width:50%;
+    height: 50px;
+    border-bottom:solid 0.5px #e6dddd ;
+}
+#primerafila td > p{
+    
+text-align:right;
+font-size:x-small;
+
+}
+#segundafila td{
+    height: 100px;
+    text-align: center;
+    
+}
+
+#uno {
+    font-size: xx-large;
+    font-weight:bold;
+    border-bottom: #e6dddd solid 1px;
+}
+
+#dos{
+    padding-left:20px;
+}
+
+#tres {
+    position:relative;
+    top: 7%;
+}
+
+#cuatro{
+    text-align: center;
+}
+
+#cuatro button{
+    width:200px;
+    height:80px;
+    border-radius: 10px;
+    background-color: #e6dddd;
+}
+
+#tercerafila td{
+    height: 100px;
+}
+
+#especificaciones{
+    display:flex;
+}
+
+#tabla1{
+    width:35%;
+    margin:5%;
+}
+
+#tabla1 th{
+    border-bottom: lightslategray solid 3px;
+}
+
+#tabla1 td{
+    height:50px;
+}
+
+#tabla2{
+    width:55%;
+    margin:5%;
+}
+
+#tabla2 th{
+    border-bottom: lightslategray solid 3px;
+}
+#tabla2 td{
+    padding-top: 50px;
+}
+
+#tabla3{
+    width:95%;
+    margin:5%;
+}
+
+#tabla3 th{
+    font-size: x-large;
+    border-bottom: lightslategray solid 3px;
+    text-align: left;
+    margin:50px;
+}
+
+#tabla3 td{
+    padding:30px;
+    border-bottom: lightslategray solid 1px;
+}

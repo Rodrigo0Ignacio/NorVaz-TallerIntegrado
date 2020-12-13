@@ -135,7 +135,7 @@ switch (rol){
                         <li><a href="usuario-Editar.jsp"> Editar Perfil </a></li>
                         <li><a href="Agregar-Administrador.jsp"> Agregar Administrador </a></li>
                         <li><a href="editar-cuenta-administrador.jsp"> Editar Cuenta Usuario </a></li>
-                        <li><a href=" "> Agregar Producto </a></li>
+                        <li><a href="Administrador-IngresarProducto.jsp"> Agregar Producto </a></li>
                         <li><a href=" "> Editar Producto </a></li>
                         <li><a href=" "> Administrar Estado </a></li>
                     </ul>

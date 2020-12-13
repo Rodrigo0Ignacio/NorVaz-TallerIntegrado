@@ -28,7 +28,6 @@ public class Actualizar_Usuario extends Conexion {
         return 1;
     }
 
-    /*POR TERMINAR*/
     public int ActualizarDatos(Usuario usuario) {
 
         super.query = "update usuario set nombre = '" + usuario.getNombre()+

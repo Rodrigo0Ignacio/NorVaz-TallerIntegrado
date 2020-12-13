@@ -20,6 +20,14 @@
         <servlet-name>Servlet_servicio</servlet-name>
         <servlet-class>controlador.Servlet_servicio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_AgregarAdministrador</servlet-name>
+        <servlet-class>controlador.Servlet_AgregarAdministrador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_EditarAdministrador</servlet-name>
+        <servlet-class>controlador.Servlet_EditarAdministrador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_index</servlet-name>
         <url-pattern>/servlet_index</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>Servlet_servicio</servlet-name>
         <url-pattern>/servlet_servicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_AgregarAdministrador</servlet-name>
+        <url-pattern>/servlet_AgregarAdministrador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_EditarAdministrador</servlet-name>
+        <url-pattern>/servlet_EditarAdministrador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

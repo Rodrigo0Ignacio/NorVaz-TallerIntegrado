@@ -1,8 +1,9 @@
 
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidad.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
-<%  
+<%
 HttpSession sesion = request.getSession();
 /* capturamos la sesion del usuario*/
 String nombre = null;
@@ -18,7 +19,14 @@ if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null 
     usuario = sesion.getAttribute("usuario").toString();
     nombre = sesion.getAttribute("nombre").toString();
 }
+// capturamos los atributos entrantes del usuario a editar
+ArrayList<Usuario> lista = (ArrayList<Usuario>) request.getAttribute("lista");
 
+// capturamos la variable para ocultar un form
+String formBuscarCUenta = null;
+if(request.getAttribute("ocultarForm") != null){
+    formBuscarCUenta = "style=\"display: none\"";
+}
 
 
 switch (rol){
@@ -42,10 +50,11 @@ switch (rol){
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/Servicios-estilos.css" rel="stylesheet" type="text/css"/>
-        <title>NorVaz - Servicios</title>
+        <link href="css/editar-cuenta-administrador-estilos.css" rel="stylesheet" type="text/css"/>
+        <title>NorVaz - Editar una Cuenta</title>
     </head>
-     <!--VENTANA FLOTANTE-->
+    <body>
+        <!--VENTANA FLOTANTE-->
         <div class="flotante" id="ventana">
             <div id="cerrar">
                 <a href="javascript:cerrar()"><img src="img/boton.png"></a>
@@ -57,8 +66,7 @@ switch (rol){
 
             </div>
         </div>
-    <body>
-          <div id="contenedor">
+            <div id="contenedor">
         <div id="header">
 
             <div id="logo">
@@ -69,7 +77,8 @@ switch (rol){
                 <ul>
                     <li><img class="central" src="img/usuario.png" alt=""></li>
                 </ul>
-                 <!--APARTADO DE OPCIONES DE SESION (USUARIO)-->
+                
+                <!--APARTADO DE OPCIONES DE SESION (USUARIO)-->
                     <ul <%=sesionIniciada%> >
                         <li><a href="InicioSesion.jsp"> Bienvenid@ <%=nombre%> </a></li>
                         <li><a href="index.jsp?cerrar=true">Cerrar Sesion</a></li>
@@ -80,10 +89,12 @@ switch (rol){
                         <li><a href="InicioSesion.jsp"> Crear una cuenta</a></li>
                         <li><a href="javascript:abrir()"> olvidaste tu contraseña</a></li>
                     </ul>
+                
+
             </div>
 
         </div>
-        <div id="nav1">
+       <div id="nav1">
             <nav class="navegacion">
                 <ul class="menu">
                     <li><a href="index.jsp">Inicio </a></li>
@@ -101,9 +112,9 @@ switch (rol){
                     <li><a href="Ofertas.jsp">Ofestas </a></li>
                     <li><a href="Contactanos.jsp"> Contactanos </a></li>
                 </ul>
-            </nav>      
+            </nav>
         </div>
-             <!--ESTE SUB MENU PERTENECE AL USUARIO-->
+              <!--ESTE SUB MENU PERTENECE AL USUARIO-->
             <div id="barra-usuario1" class="barra-usuario" <%= estiloU%>  >
                 <nav class="navegacionUser">
                     <ul class="menu2">
@@ -131,116 +142,75 @@ switch (rol){
                     </ul>
                 </nav>
 
-            </div>
+
+        </div>
 
         <div id="publicidad">
-            <img class="imagen-publicitaria" src="img/publicidad.jpg" alt="" height="100%" width="100%">
-
         </div>
-        <div id="contenido">
-            <article class="producto">
+                <div id="contenido">
+                    <div class="InisiarSesion" <%=formBuscarCUenta%> >
+                         <h2> Buscar Cuenta </h2>
+                         <br>
+                         <form method="post" action="servlet_EditarAdministrador" >
+                             <table>
+                                 <tr>
+                                 <tr><td><br></td><td></td></tr>
+                                 <tr><td>RUT&nbsp;&nbsp;</td><td><input type="text"
+                                 name="txt_rut" placeholder="Ingrese el rut de la cuenta a editar"></td></tr>
+                                 <tr><td><br></td><td></td></tr>
+                                 <tr><td></td><td> <input type="submit" name="btn_buscar" value="Buscar Cuenta"></td></tr>
+                                 <tr><td><br></td><td></td></tr>
+                                 
+                             </table>
+                         </form>
 
-                <div id="imagenProducto">
-                    <img src="img/gafiteria.jpg" alt="">
+                     </div>
+                    
+                    <%if (lista != null) {%>
+                    <%for (Usuario i : lista) {%>
+                    <div class="cuenta" >
+                        <h2> Editar Cuenta </h2>
+                        <br>
+                        <form method="post" action="servlet_EditarAdministrador"  >
+                            <table>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td><input type="hidden" value="<%=i.getId_usuario()%>" name="id"></td></tr>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td>RUT* </td><td><input type="text" value="<%=i.getRut()%>" name="txt_rutM"></td></tr>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td>Nombre* </td><td><input type="text" value="<%=i.getNombre()%>" name="txt_nombreM"></td></tr>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td>Apellidos* </td><td><input type="text" value="<%=i.getApellidos()%>" name="txt_apellidoM"></td></tr>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td>Email* </td><td><input type="email" value="<%=i.getEmail()%>" name="txt_emailM" placeholder="ejemplo: roberto.farias@dominio.cl"></td></tr>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td>Telefono* </td><td><input type="tel" value="<%=i.getTelefono()%>" name="txt_telefonoM" placeholder="ejemplo: 98745632"></td></tr>
+                                <tr><td><br></td><td></td></tr>
 
-                </div>
-                
-                <div id="detalles">
-                    <ul>
-                        <li>Gafiteria: <p>
-                            Servicio Gasfiter profesional, si tienen un problema con tu
-                            baño, llaves, cañerias de gas y muchos otros problemas,
-                            no dudes en solitiar nuestros servicios. disponible en todo San Antonio
-                            y ardedores.
-                        </p></li>
-                        
-                    </ul>
-                </div>
-                <div id="Boton">
-                    <button onclick="location.href='usuario-servicios.jsp?servicio=1';">Solicitar</button>
+                                <tr><td></td><td> <input type="submit" name="btn_editar" value="Editar Cuenta"></td></tr>
+                                <tr><td><br></td><td></td></tr>
+                                <tr><td></td><td> <input type="submit" name="btn_eliminar" value="Eliminar Cuenta"></td></tr>    
+                            </table>
+                        </form>
+                    </div>
+                    <%}%>
+                    <%}%>
+                    <%if (lista != null) {%>
+                    <%if (lista.isEmpty()) {%>
+                        <h1>Usuario no encontrado</h1>
 
-                </div>
-                
-
-            </article>
-            <article class="producto">
-                
-                <div id="imagenProducto">
-                    <img src="img/mantenimientojpg.jpg" alt="">
-
-                </div>
-                
-                <div id="detalles">
-                    <ul>
-                        <li>Mantenimiento:<p>
-                            Servicio de Carpiteria, si tienes muebles viejos 
-                            y extrañas verlos nuevamente en tu casa, no dudes en solicitar nuestro
-                            servicio de mantenimiento. limpiamos, pulimos y pintamos muebles de todo tipo.
-                        </p>
-                         </li> 
-                    </ul>
-                </div>
-                <div id="Boton">
-                    <button onclick="location.href='usuario-servicios.jsp?servicio=2';"> Solicitar</button>
-
-                </div>
-
-            </article>
-            <article class="producto"> 
-                
-                <div id="imagenProducto">
-                    <img src="img/pinturajpg.jpg" alt="">
-
-                </div>
-                
-                <div id="detalles">
-                    <ul>
-                        <li>Servicio de Pintura: <p>
-                            Profecionales en pintura, si tienes algun mueble que quieras darle otro 
-                            estilo o sensillamente por que nunca te gusto su color, contactanos 
-                            
-                        </p></li>
-                       
-                    </ul>
-                </div>
-                <div id="Boton">
-                    <button onclick="location.href='usuario-servicios.jsp?servicio=3';"> Solicitar</button>
-
+                    <%}%>
+                    <%}%>
                 </div>
 
-            </article>
-            <article class="producto">
-                
-                <div id="imagenProducto">
-                    <img src="img/reparaciones-muebles.png" alt="">
-
-                </div>
-                
-                <div id="detalles">
-                    <ul>
-                        <li>Servicio de Reparacion: <a>
-                            tenemos los mejores profecionales en carpinteria para
-                            realizar todo tipo de repaciones a tus muebles favoritos.
-                        </a></li>
-                       
-                        
-                    </ul>
-                </div>
-                <div id="Boton">
-                    <button onclick="location.href='usuario-servicios.jsp?servicio=4';"> Solicitar </button>
-
-                </div>
-
-            </article>
-
-        </div>
 
         <div id="fooster">
             datos 
 
         </div>
     </div>
+
     </body>
-     <!--JS DE VETANA FLOTANTE-->
+    <!--JS DE VETANA FLOTANTE-->
     <script src="js/ventana-flotante.js" type="text/javascript"></script>
 </html>

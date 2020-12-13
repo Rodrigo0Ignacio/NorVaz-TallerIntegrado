@@ -17,7 +17,7 @@ public class Crear_Usuario extends Conexion{
 
 // Registro solo para usuarios
     public int RegistrarUsuario(Usuario usuario){
-        super.query = "INSERT INTO usuario VALUES('"+usuario.getRut()+"','"+usuario.getNombre()+"','"
+        super.query = "INSERT INTO usuario VALUES(NULL,'"+usuario.getRut()+"','"+usuario.getNombre()+"','"
                 +usuario.getApellidos()+"','"+usuario.getEmail()+"','"+usuario.getTelefono()+"','"+
                 usuario.getContrasena()+"',1)";
         try {

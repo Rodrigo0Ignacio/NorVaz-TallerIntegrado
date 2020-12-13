@@ -2,13 +2,13 @@
 package Entidad;
 
 public class Servicio {
-    public String rut;
-    public String tipo;
-    public String poblacion;
-    public String calle;
-    public String nroHome;
-    public String telefono;
-    public String descripcion;
+    private String rut;
+    private String tipo;
+    private String poblacion;
+    private String calle;
+    private String nroHome;
+    private String telefono;
+    private String descripcion;
 
     public Servicio() {
     }

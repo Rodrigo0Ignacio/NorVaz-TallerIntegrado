@@ -132,12 +132,12 @@ switch (rol){
                 <nav class="navegacionUser">
                     <ul class="menu2">
 
-                        <li><a href=" "> Editar Perfil </a></li>
-                        <li><a href=" "> Cambiar contraseña </a></li>
-                        <li><a href=" "> Subir Articulos </a></li>
-                        <li><a href=" "> Eliminar Usuarios </a></li>
-                        <li><a href=" "> varias cosas </a></li>
-                        <li><a href=" "> <img src="img/carrito.png"> ver carrito </a></li>
+                        <li><a href="usuario-Editar.jsp"> Editar Perfil </a></li>
+                        <li><a href="Agregar-Administrador.jsp"> Agregar Administrador </a></li>
+                        <li><a href="editar-cuenta-administrador.jsp"> Editar Cuenta Usuario </a></li>
+                        <li><a href=" "> Agregar Producto </a></li>
+                        <li><a href=" "> Editar Producto </a></li>
+                        <li><a href=" "> Administrar Estado </a></li>
                     </ul>
                 </nav>
 

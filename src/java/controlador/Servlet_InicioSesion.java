@@ -82,11 +82,7 @@ public class Servlet_InicioSesion extends HttpServlet {
                 usuario1.setTelefono(telefono);
                 usuario1.setContrasena(contrasena);
 
-                try {
-                    advertencia = valida.RegistrarUsuario(usuario1);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Servlet_InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                advertencia = valida.RegistrarUsuario(usuario1);
                 response.sendRedirect("InicioSesion.jsp?validador=" + advertencia);
             }
         } else {

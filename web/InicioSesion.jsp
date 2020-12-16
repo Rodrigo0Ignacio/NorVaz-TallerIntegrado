@@ -109,10 +109,7 @@ switch (rol){
                 <nav class="navegacionUser">
                     <ul class="menu2">
 
-                        <li><a href=" "> Editar Perfil </a></li>
-                        <li><a href=" "> Cambiar contraseña </a></li>
-                        <li><a href=" "> Sigue tu despacho </a></li>
-                        <li><a href=" "> Sigue tu despacho </a></li>
+                        <li><a href="usuario-Editar.jsp"> Editar Perfil </a></li>
                         <li><a href=" "> Sigue tu despacho </a></li>
                         <li><a href=" "> <img src="img/carrito.png"> ver carrito </a></li>
                     </ul>

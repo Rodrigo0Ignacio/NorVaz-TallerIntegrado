@@ -1,4 +1,5 @@
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Entidad.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
@@ -19,6 +20,8 @@ if(sesion.getAttribute("rol") != null && sesion.getAttribute("usuario") != null 
     nombre = sesion.getAttribute("nombre").toString();
 }
 
+ArrayList listaErrores = (ArrayList) request.getAttribute("listaErrores");
+
 switch (rol){
     case "1":
          estiloA = "style=\"display: none\"";
@@ -35,6 +38,8 @@ switch (rol){
         estiloA = "style=\"display: none\"";
         sesionIniciada = "style=\"display: none\"";
 }
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -149,14 +154,20 @@ switch (rol){
                 ya que el producto se ingresara sin su respectiva imagen, en el caso de dejar en blanco
                 en la opcion Editar producto se podra modificar dicho campo.
                 </p>
-            </div>
+                <%if (listaErrores != null) {%>
+                <%for (int i = 0; i < listaErrores.size(); i++) {%>
+                <li><%=listaErrores.get(i)%></li>
+
+                <%}%>
+                <%}%>
+             </div>
 
             <div class="Registrarse">
                 <h2> Ingresar Producto </h2>
-                <form method="post" action="" >
+                <form method="post" action="servlet_AgregarProducto" >
                     <table>
                         <tr><td><br></td><td></td></tr>
-                        <tr><td>Codigo de producto* </td><td><input type="text" value="" name="txt_code"></td></tr>
+                        <tr><td>Codigo de producto* </td><td><input type="text" name="txt_code"></td></tr>
                         <tr><td><br></td><td></td></tr>
                         <tr><td>Nombre* </td><td><input type="text" value="" name="txt_nombre"></td></tr>
                         <tr><td><br></td><td></td></tr>
@@ -174,16 +185,11 @@ switch (rol){
                                     <option>Camas</option>
                                     <option>Escritorios</option>
                                     <option>Cómodas</option>
-                                    <option>Otomanas</option>
                                     <option>Mesas de comedor</option>
                                     <option>Sofás seccionales</option>
                                     <option>Muebles de televisor</option>
                                     <option>Bibliotecas</option>
-                                    <option>Futones</option>
-                                    <option>Literas</option>
                                     <option>Mesitas de café</option>
-                                    <option>Taburetes</option>
-                                    <option>Mesas auxiliares de salón</option>
                                     <option>Beladores</option>
                                     <option>Mini bar</option>
                                     <option>Islas para cocina</option>
@@ -196,14 +202,13 @@ switch (rol){
                         <tr><td><br></td><td></td></tr>
                         <tr><td>Descripcion* </td><td><textarea name="descripcion" rows="4" cols="36" placeholder="Ingrese una breve descripcion"></textarea></td></tr>
                         <tr><td><br></td><td></td></tr>
-                        <tr><td>Oferta</td><td><input type="number" name="oferta" placeholder="Ingrese datos sin puntos"></td></tr>
-                        <tr><td><br></td><td></td></tr>
                         <tr><td>Ingresar Imagen </td><td><input type="text" name="img" placeholder="imagen.jpg"></td></tr>
                         <tr><td><br></td><td></td></tr>
                         <tr><td></td><td> <input type="submit" name="btn_regisProducto" value="Ingresar Producto"></td></tr>
                     </table>
                 </form>
             </div>
+          
            
         </div>
 

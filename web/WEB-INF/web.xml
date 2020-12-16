@@ -29,8 +29,12 @@
         <servlet-class>controlador.Servlet_EditarAdministrador</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Servlet_Producto</servlet-name>
-        <servlet-class>controlador.Servlet_Producto</servlet-class>
+        <servlet-name>Servlet_AgregarProducto</servlet-name>
+        <servlet-class>controlador.Servlet_AgregarProducto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_EditarProductos</servlet-name>
+        <servlet-class>controlador.Servlet_EditarProductos</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_index</servlet-name>
@@ -61,8 +65,12 @@
         <url-pattern>/servlet_EditarAdministrador</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Servlet_Producto</servlet-name>
-        <url-pattern>/servlet_Producto</url-pattern>
+        <servlet-name>Servlet_AgregarProducto</servlet-name>
+        <url-pattern>/servlet_AgregarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_EditarProductos</servlet-name>
+        <url-pattern>/servlet_EditarProductos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

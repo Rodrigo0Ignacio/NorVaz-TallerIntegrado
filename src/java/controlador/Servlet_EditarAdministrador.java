@@ -27,10 +27,9 @@ public class Servlet_EditarAdministrador extends HttpServlet {
         Borrar_Administrador borrarAdmin = new Borrar_Administrador();
 
         Usuario usuario1 = new Usuario();
-
         int telefonoI = 0;
         int idI = 0;
-
+        
         String buscarRut = request.getParameter("txt_rut");
         String buscar = request.getParameter("btn_buscar");
 

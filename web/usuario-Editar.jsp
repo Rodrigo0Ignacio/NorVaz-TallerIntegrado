@@ -129,8 +129,6 @@ switch (rol){
 
                         <li><a href="usuario-Editar.jsp"> Editar Perfil </a></li>
                         <li><a href=" "> Sigue tu despacho </a></li>
-                        <li><a href=" "> Sigue tu despacho </a></li>
-                        <li><a href=" "> Sigue tu despacho </a></li>
                         <li><a href=" "> <img src="img/carrito.png"> ver carrito </a></li>
                     </ul>
                 </nav>

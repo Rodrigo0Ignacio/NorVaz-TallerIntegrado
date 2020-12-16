@@ -14,7 +14,6 @@ public class Producto {
     private String peso;
     private int precio;
     private int stock;
-    private int oferta;
     private String url;
 
     public Producto() {
@@ -23,9 +22,9 @@ public class Producto {
     public Producto(String categoria) {
         this.categoria = categoria;
     }
-    
 
-    public Producto(String codigo, String nombre, String categoria, String descripcion, String peso, int precio, int stock, int oferta, String url) {
+    public Producto(String codigo, String nombre, int precio,
+            int stock, String categoria, String descripcion, String peso, String url) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -33,9 +32,9 @@ public class Producto {
         this.peso = peso;
         this.precio = precio;
         this.stock = stock;
-        this.oferta = oferta;
         this.url = url;
     }
+    
 
     public String getCodigo() {
         return codigo;
@@ -93,14 +92,6 @@ public class Producto {
         this.stock = stock;
     }
 
-    public int getOferta() {
-        return oferta;
-    }
-
-    public void setOferta(int oferta) {
-        this.oferta = oferta;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -108,17 +99,6 @@ public class Producto {
     public void setUrl(String url) {
         this.url = url;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
